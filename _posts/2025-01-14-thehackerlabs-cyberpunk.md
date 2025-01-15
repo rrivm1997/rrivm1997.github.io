@@ -1,7 +1,7 @@
 ---
 title: "Cyberpunk"
 date: 2025-01-14 00:00:00 +0900
-categories: [The Hacker Lab] 
+categories: [The Hacker Labs] 
 tags: [Linux]
 ---
 
@@ -12,5 +12,3 @@ tags: [Linux]
 - OS: Linux
 - Difficulty: Easy
 - Platform: The Hacker Labs
-
-test
