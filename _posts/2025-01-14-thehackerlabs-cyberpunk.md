@@ -41,9 +41,6 @@ We started by identifying the IP of the target machine using the ip a command to
 
 - `-p-`: Scan all ports.
 - `--open`: Shows only open ports.
-- `-sS`: SYN scan to determine the status of the ports.
-- `-sC`: Enables version detection and vulnerability scanning.
-- `-sV`: Service version scanning.
 - `--min-rate 5000`: Minimum scan rate.
 - `-vvv`: Very high verbosity for detailed information.
 - `-n`: Disables DNS resolution.
@@ -78,4 +75,77 @@ MAC Address: 08:00:27:D9:48:FE (PCS Systemtechnik/Oracle VirtualBox virtual NIC)
 Read data files from: /usr/share/nmap
 Nmap done: 1 IP address (1 host up) scanned in 54.79 seconds
            Raw packets sent: 124832 (5.493MB) | Rcvd: 12484 (499.368KB)
+```
+
+Now I will use a function that I have saved in my zshrc call **extractPorts**. This will copy only the ports that I will scan. 
+
+```bash
+❯ extractPorts allPorts
+───────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: extractPorts.tmp
+───────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ 
+   2   │ [*] Extracting information...
+   3   │ 
+   4   │     [*] IP Address: 192.168.1.134
+   5   │     [*] Open ports: 21,22,80
+   6   │ 
+   7   │ [*] Ports copied to clipboard
+   8   │ 
+───────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+```
+## NMAP second scan
+
+```bash
+nmap -sVC -p21,22,80 192.168.1.134 -oN ports
+```
+
+## What does this mean?
+
+- `-sC`: Enables version detection and vulnerability scanning.
+- `-sV`: Service version scanning.
+- `-p`: Scans given ports.
+- `192.168.1.134`: IP address of the target machine.
+- `oN`: Saves the results to a file called "ports".
+
+```bash
+ nmap -sVC -p21,22,80 192.168.1.134 -oN ports
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-01-14 22:15 CST
+Nmap scan report for Cyberpunk.attlocal.net (192.168.1.134)
+Host is up (0.00096s latency).
+
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| drwxr-xr-x   2 0        0            4096 May  1  2024 images
+| -rw-r--r--   1 0        0             713 May  1  2024 index.html
+|_-rw-r--r--   1 0        0             923 May  1  2024 secret.txt
+| fingerprint-strings: 
+|   GenericLines: 
+|     220 Servidor ProFTPD (Cyberpunk) [::ffff:192.168.1.134]
+|     Orden incorrecta: Intenta ser m
+|     creativo
+|     Orden incorrecta: Intenta ser m
+|     creativo
+|   Help: 
+|     220 Servidor ProFTPD (Cyberpunk) [::ffff:192.168.1.134]
+|     214-Se reconocen las siguiente 
+|     rdenes (* =>'s no implementadas):
+|     XCWD CDUP XCUP SMNT* QUIT PORT PASV 
+|     EPRT EPSV ALLO RNFR RNTO DELE MDTM RMD 
+|     XRMD MKD XMKD PWD XPWD SIZE SYST HELP 
+|     NOOP FEAT OPTS HOST CLNT AUTH* CCC* CONF* 
+|     ENC* MIC* PBSZ* PROT* TYPE STRU MODE RETR 
+|     STOR STOU APPE REST ABOR RANG USER PASS 
+|     ACCT* REIN* LIST NLST STAT SITE MLSD MLST 
+|     comentario a root@Cyberpunk
+|   NULL, SMBProgNeg, SSLSessionReq: 
+|_    220 Servidor ProFTPD (Cyberpunk) [::ffff:192.168.1.134]
+22/tcp open  ssh     OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)
+| ssh-hostkey: 
+|   256 6d:b5:c8:65:8d:1f:8a:98:76:93:26:27:df:29:72:4a (ECDSA)
+|_  256 a5:83:2a:8f:eb:c6:f1:0b:e0:e6:d8:e1:05:3b:4c:a5 (ED25519)
+80/tcp open  http    Apache httpd 2.4.59 ((Debian))
+|_http-title: Arasaka
+|_http-server-header: Apache/2.4.59 (Debian)
 ```
