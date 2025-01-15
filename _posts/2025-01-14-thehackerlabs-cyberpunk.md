@@ -13,13 +13,13 @@ tags: [Linux, Easy]
 - Difficulty: Easy
 - Platform: The Hacker Labs
 
-# Introduction
+## Introduction
 
 Welcome to **"Cyberpunk - Relic Infiltration,"**, a Linux-based CTF for beginners. In this writeup, we will narrate step by step how the infiltration and exploitation of vulnerabilities were carried out, from initial reconnaissance to privilege escalation and gaining **root** access.
 
 ![cyberpunk cmd](assets/img/pentest/cyberpunkcmd.png)
 
-# Identifying Our Target
+## Identifying Our Target
 
 We started by identifying the IP of the target machine using the ip a command to check our network configuration, and then with arp-scan, we scanned the local network to find the IP of the vulnerable machine.
 
@@ -31,7 +31,7 @@ We started by identifying the IP of the target machine using the ip a command to
 ❯ 192.168.1.134 08:00:27:d9:48:fe (Unknown)
 ```
 
-# NMAP Scan
+## NMAP Scan
 
 ```bash
 ❯ sudo nmap -p- --open --min-rate 5000 -vvv -n -Pn 192.168.1.134 -oG allPorts
@@ -100,7 +100,7 @@ Now I will use a function that I have saved in my zshrc call **extractPorts**. T
 nmap -sVC -p21,22,80 192.168.1.134 -oN ports
 ```
 
-## What does this mean?
+### What does this mean?
 
 - `-sC`: Enables version detection and vulnerability scanning.
 - `-sV`: Service version scanning.
@@ -149,3 +149,11 @@ PORT   STATE SERVICE VERSION
 |_http-title: Arasaka
 |_http-server-header: Apache/2.4.59 (Debian)
 ```
+
+## Enumeration
+
+### Port 80
+
+Upon identifying that port 80 was open during the scan, the IP address was entered into the browser. A page called **Arasaka** with an image was found.
+
+![web](assets/img/pentest/web.png)
