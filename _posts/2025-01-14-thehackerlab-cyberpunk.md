@@ -1,5 +1,5 @@
 ---
-title: "Cyberpunk - The Hacker Labs"
+title: "Cyberpunk"
 date: 2025-01-14 00:00:00 +0800
 categories: [The Hacker Lab] 
 tags: [CTF] [Linux] [Easy]
@@ -7,7 +7,7 @@ tags: [CTF] [Linux] [Easy]
 
 # The Hacker Labs Cyberpunk WriteUp
 
-<img alt="‘Cyberpunk’ Avatar" src="assets/img/cyberpunk.png">
+![cyberpunk](assets/img/cyberpunk.png)
 
 - OS: Linux
 - Difficulty: Easy
