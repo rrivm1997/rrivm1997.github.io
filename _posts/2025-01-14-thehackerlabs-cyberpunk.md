@@ -2,7 +2,7 @@
 title: "Cyberpunk"
 date: 2025-01-14 00:00:00 +0900
 categories: [The Hacker Labs] 
-tags: [Linux]
+tags: [Linux, Easy]
 ---
 
 # The Hacker Labs Cyberpunk WriteUp
