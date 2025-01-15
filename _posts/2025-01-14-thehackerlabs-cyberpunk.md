@@ -30,3 +30,23 @@ We started by identifying the IP of the target machine using the ip a command to
 ```bash
 ❯ 192.168.1.134 08:00:27:d9:48:fe (Unknown)
 ```
+
+# NMAP Scan
+
+```bash
+sudo nmap -p- --open -sS -sC -sV --min-rate 5000 -vvv -n -Pn 192.168.1.134 -oN allPorts
+```
+
+### What does this mean?
+
+`-p-`: Scan all ports.
+`--open`: Shows only open ports.
+`-sS`: SYN scan to determine the status of the ports.
+`-sC`: Enables version detection and vulnerability scanning.
+`-sV`: Service version scanning.
+`--min-rate 5000`: Minimum scan rate.
+`-vvv`: Very high verbosity for detailed information.
+`-n`: Disables DNS resolution.
+`-Pn`: Ignores host discovery (does not check if the host is online).
+`192.168.1.134`: IP address of the target machine.
+`-oN allPorts`: Saves the results to a file called "allPorts".
