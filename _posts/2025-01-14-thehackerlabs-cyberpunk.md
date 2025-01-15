@@ -34,22 +34,22 @@ We started by identifying the IP of the target machine using the ip a command to
 # NMAP Scan
 
 ```bash
-sudo nmap -p- --open --min-rate 5000 -vvv -n -Pn 192.168.1.134 -oG allPorts
+❯ sudo nmap -p- --open --min-rate 5000 -vvv -n -Pn 192.168.1.134 -oG allPorts
 ```
 
 ### What does this mean?
 
-`-p-`: Scan all ports.
-`--open`: Shows only open ports.
-`-sS`: SYN scan to determine the status of the ports.
-`-sC`: Enables version detection and vulnerability scanning.
-`-sV`: Service version scanning.
-`--min-rate 5000`: Minimum scan rate.
-`-vvv`: Very high verbosity for detailed information.
-`-n`: Disables DNS resolution.
-`-Pn`: Ignores host discovery (does not check if the host is online).
-`192.168.1.134`: IP address of the target machine.
-`-oG allPorts`: Saves the results to a file called "allPorts".
+- `-p-`: Scan all ports.
+- `--open`: Shows only open ports.
+- `-sS`: SYN scan to determine the status of the ports.
+- `-sC`: Enables version detection and vulnerability scanning.
+- `-sV`: Service version scanning.
+- `--min-rate 5000`: Minimum scan rate.
+- `-vvv`: Very high verbosity for detailed information.
+- `-n`: Disables DNS resolution.
+- `-Pn`: Ignores host discovery (does not check if the host is online).
+- `192.168.1.134`: IP address of the target machine.
+- `-oG allPorts`: Saves the results to a file called "allPorts".
 
 ```bash
 ❯ sudo nmap -p- --open --min-rate 5000 -vvv -n -Pn 192.168.1.134 -oG allPorts
