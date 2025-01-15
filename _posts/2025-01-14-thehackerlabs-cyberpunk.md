@@ -34,7 +34,7 @@ We started by identifying the IP of the target machine using the ip a command to
 # NMAP Scan
 
 ```bash
-sudo nmap -p- --open -sS -sC -sV --min-rate 5000 -vvv -n -Pn 192.168.1.134 -oN allPorts
+sudo nmap -p- --open -sS -sC -sV --min-rate 5000 -vvv -n -Pn 192.168.1.134 -oG allPorts
 ```
 
 ### What does this mean?
@@ -49,4 +49,4 @@ sudo nmap -p- --open -sS -sC -sV --min-rate 5000 -vvv -n -Pn 192.168.1.134 -oN a
 `-n`: Disables DNS resolution.
 `-Pn`: Ignores host discovery (does not check if the host is online).
 `192.168.1.134`: IP address of the target machine.
-`-oN allPorts`: Saves the results to a file called "allPorts".
+`-oG allPorts`: Saves the results to a file called "allPorts".
