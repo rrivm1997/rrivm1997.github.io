@@ -7,7 +7,7 @@ tags: [CTF] [Linux] [Easy]
 
 # The Hacker Labs Cyberpunk WriteUp
 
-![Cyberpunk](image.png)
+<img alt="‘Cyberpunk’ Avatar" src="assets/img/cyberpunk.webp">
 
 - OS: Linux
 - Difficulty: Easy
