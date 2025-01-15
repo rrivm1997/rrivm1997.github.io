@@ -19,3 +19,14 @@ Welcome to **"Cyberpunk - Relic Infiltration,"**, a Linux-based CTF for beginner
 
 ![cyberpunk cmd](assets/img/pentest/cyberpunkcmd.png)
 
+# Identifying Our Target
+
+We started by identifying the IP of the target machine using the ip a command to check our network configuration, and then with arp-scan, we scanned the local network to find the IP of the vulnerable machine.
+
+```bash
+❯ ip a
+```
+
+```bash
+❯ 192.168.1.134 08:00:27:d9:48:fe (Unknown)
+```
