@@ -157,3 +157,49 @@ PORT   STATE SERVICE VERSION
 Upon identifying that port 80 was open during the scan, the IP address was entered into the browser. A page called **Arasaka** with an image was found.
 
 ![web](assets/img/pentest/web.png)
+
+### Directory FUZZ With Dirb
+
+This used to perform a web directory brute-forcing attack on the target IP address using a tool called DIRB. DIRB is a command-line tool used to discover hidden directories and files on a web server by using a wordlist of common directory names or custom ones.
+
+When you run this command, DIRB will send HTTP requests to http://0.0.0.0/ (or https:// if specified) and attempt to find accessible directories or files based on the provided wordlist. It will return a list of discovered resources along with their HTTP status codes.
+
+```bash
+ dirb http://192.168.1.134
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Tue Jan 14 22:30:28 2025
+URL_BASE: http://192.168.1.134/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://192.168.1.134/ ----
+==> DIRECTORY: http://192.168.1.134/images/                                                                                                                                              
++ http://192.168.1.134/index.html (CODE:200|SIZE:713)                                                                                                                                    
++ http://192.168.1.134/server-status (CODE:403|SIZE:278)                                                                                                                                 
+                                                                                                                                                                                         
+---- Entering directory: http://192.168.1.134/images/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+                                                                               
+-----------------
+END_TIME: Tue Jan 14 22:30:34 2025
+DOWNLOADED: 4612 - FOUND: 2
+```
+
+There is nothing worth noting here.
+
+### Directory And File FUZZ With Gobuster
+
+The command gobuster dir is used with Gobuster, a tool for directory and file brute-forcing on a web server. This command specifically focuses on discovering hidden directories and files on a web server by making HTTP requests based on a wordlist.
+
+```bash
+gobuster -u http://192.168.1.134/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt -x php, txt, html, bak, py
+```
