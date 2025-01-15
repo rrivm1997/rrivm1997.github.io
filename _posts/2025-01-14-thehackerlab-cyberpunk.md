@@ -1,6 +1,6 @@
 ---
 title: "Cyberpunk"
-date: 2025-01-14 00:00:00 +0800
+date: 2025-01-14 00:00:00 +0900
 categories: [The Hacker Lab] 
 tags: [CTF] [Linux] [Easy]
 ---
@@ -13,4 +13,4 @@ tags: [CTF] [Linux] [Easy]
 - Difficulty: Easy
 - Platform: The Hacker Labs
 
-test test
+test 
