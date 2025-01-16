@@ -1,5 +1,5 @@
 ---
-title: "HTTP HEAD, GET, and POST requests"
+title: "HTTP HEAD, GET, and POST Requests"
 date: 2025-01-16 00:00:00 +0900
 categories: [HTTP Protocol] 
 tags: [HTTP, WEB DEVELOPMENT, HTTP METHODS, GET, POST, HEAD, WEB REQUESTS, NETWORKING, APIS, SERVER COMMUNICATION]
