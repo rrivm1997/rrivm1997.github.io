@@ -378,9 +378,9 @@ os.system("chmod u+s /bin/bash")
 ```
 Run the command that arasaka can run as root.
 
-Enter any random string. It will give ou an error. 
+Enter any random string. It will give us an error. 
 
-Now, this change our permission and gave us root access.
+Now, this changed our permission and gave us root access.
 
 ```bash
 bash -p
