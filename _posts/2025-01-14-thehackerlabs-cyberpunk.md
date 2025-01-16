@@ -201,7 +201,7 @@ There is nothing worth noting here.
 The command gobuster dir is used with Gobuster, a tool for directory and file brute-forcing on a web server. This command specifically focuses on discovering hidden directories and files on a web server by making HTTP requests based on a wordlist.
 
 ```bash
-gobuster -u http://192.168.1.134/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt -x php, txt, html, bak, py
+gobuster dir -u http://192.168.1.134/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt -x php, txt, html, bak, py
 ```
 
 ## Anonymous FTP Access
@@ -223,10 +223,16 @@ Available files:
 Downloaded and analyzed the secret.txt file:
 
 ```bash
-❯ cat secret.txt
+❯ get secret.txt
 ```
 
 Content inside of secret.txt:
+
+```bash
+❯ cat secret.txt
+```
+
+
 
 ```bash
 *********************************************
