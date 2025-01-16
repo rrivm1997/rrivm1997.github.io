@@ -2,7 +2,7 @@
 title: "Cyberpunk"
 date: 2025-01-14 00:00:00 +0900
 categories: [The Hacker Labs] 
-tags: [Linux, Easy, NMAP, HTTP, FTP, NETCAT, PYTHON]
+tags: [LINUX, EASY, NMAP, HTTP, FTP, NETCAT, PYTHON]
 ---
 
 # The Hacker Labs Cyberpunk WriteUp
