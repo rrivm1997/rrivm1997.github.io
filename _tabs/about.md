@@ -19,7 +19,7 @@ Hello! 👋 My name is **Rene**, and I’m a passionate **security enthusiast** 
 - **Network+**: CompTIA Network+
 - **A+**: CompTIA A+
 - **SSCP**: SSCP Systems Security Certified Practitioner (in progress)
-- **Linux Essentials**: Linux Professional Institue (in progress)
+- **Linux Essentials**: Linux Professional Institue
 
 - ## 🔧 Tools & Technologies
 Here are some of the tools and technologies I frequently use:
